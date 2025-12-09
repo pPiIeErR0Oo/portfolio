@@ -1,0 +1,864 @@
+/* 1. Reset Básico y Variables */
+:root {
+    --color-dark: #1A1A1A;
+    --color-accent: #8B5CF6; /* Morado */
+    --color-light: #CCCCCC;
+    --color-text: #F4F4F4;
+    --color-gray-border: rgba(139, 92, 246, 0.2); /* Morado transparente para bordes */
+    --padding-section: 80px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. El Destello de Luz (Gris y Morado) */
+body {
+    /* Degradado radial para el efecto de destello desde la esquina inferior derecha */
+    background-color: var(--color-dark);
+    /* Un destello más complejo y bonito */
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
+    background: 
+        radial-gradient(circle at 100% 100%, 
+            rgba(139, 92, 246, 0.2), /* El morado brillante y transparente */
+            var(--color-dark) 70%   /* El fondo gris/negro */
+        ), 
+        var(--color-dark);
+    
+    color: var(--color-text);
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+h1, h2, h3, .logo, .btn-primary, .nav-link {
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--color-light);
+}
+
+/* 3. Contenido Principal y Secciones */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: var(--padding-section) 0;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--color-text);
+}
+
+/* 4. Estilos de la Sección Hero */
+.hero {
+    padding: 150px 20px;
+    /* ✨ CLAVE: Centramos todos los elementos inline y bloques de texto */
+    text-align: center; 
+}
+
+.hero-title {
+    font-size: 4em;
+    margin-bottom: 10px;
+    
+    /* Revertir a display: inline-block para que se centre con text-align: center */
+    /* Usamos flex, pero ahora forzamos la alineación en la línea de base */
+    display: inline-flex; 
+    justify-content: center;
+    /* Quitamos el justify-content: center aquí. Usamos text-align en el padre. */
+    /* Alineamos verticalmente a la base (bottom) para que los textos queden en la misma línea */
+    align-items: center; 
+    
+    gap: 10px; 
+    
+    background-image: linear-gradient(45deg, var(--color-text), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1.5em;
+    color: var(--color-light);
+    margin-bottom: 30px;
+}
+
+/* 5. Botón de Ejemplo */
+.btn-primary {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: var(--color-accent);
+    color: var(--color-dark);
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #6D3DED;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* 6. Footer y Links de Redes Sociales */
+.footer {
+    padding: 40px 20px;
+    border-top: 1px solid var(--color-gray-border);
+    text-align: center;
+    background-color: #111111; 
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.social-icon {
+    font-size: 1.8em;
+    color: var(--color-light);
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-icon:hover {
+    color: var(--color-accent);
+    transform: scale(1.1);
+}
+
+/* Modifica la regla social-icon para SVG */
+.social-icon svg {
+    width: 28px; /* Ajusta el tamaño */
+    height: 28px; 
+    fill: var(--color-light); /* El equivalente a 'color' en SVG */
+    transition: fill 0.3s, transform 0.3s;
+}
+
+.social-icon:hover svg {
+    fill: var(--color-accent); /* Cambia el color al morado al pasar el mouse */
+    transform: scale(1.1);
+}
+
+.copyright {
+    margin-top: 20px;
+    font-size: 0.85em;
+    color: var(--color-light);
+}
+
+/* 7. Media Queries (Responsividad) */
+@media (max-width: 900px) {
+    
+    /* Adaptación de la sección Hero */
+.hero {
+        padding: 80px 15px !important; /* Menos padding */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: auto; /* Evita alturas forzadas */
+    }
+
+    .hero-title {
+        font-size: 2rem !important; /* Reducir drásticamente el tamaño de fuente */
+        line-height: 1.3;
+        width: 100%;
+        display: flex !important;
+        flex-direction: column !important; /* Apilar "Hola Soy" y el nombre */
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+    
+    .hero-title .typed-name-container {
+        /* Ocupa todo el ancho si fuera necesario, pero lo más importante: */
+        display: block; /* Para que se apile */
+        width: 100%;
+        text-align: center; /* Centrar el texto animado */
+    }
+
+    .hero-subtitle {
+        font-size: 1.2em;
+    }
+    
+    .section-title {
+        font-size: 2em;
+    }
+    .project-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 0 15px !important;
+    }
+
+    .project-card {
+        width: 100% !important;
+        margin-bottom: 20px;
+    }
+
+    .project-links {
+        /* Opcional: Para asegurar que los botones no se rompan, que sean de ancho completo */
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .project-link-btn {
+        width: 100%; /* Botones de ancho completo en móvil */
+        text-align: center;
+    }
+
+    /* Mostrar el botón toggle */
+   .nav-container .menu-toggle {
+        display: block !important; 
+        z-index: 1001; /* Asegura que el botón esté sobre el menú */
+    }
+
+    .nav-menu {
+        display: none; /* Oculto por defecto en móvil */
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #222; /* Fondo del menú desplegable */
+        padding: 80px 20px 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+
+    .nav-menu.is-open {
+        display: flex; /* Mostrar cuando se añade la clase is-open */
+    }
+
+    .nav-link {
+        margin: 10px 0;
+        text-align: center;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+/* 1. ELIMINAR LÍNEA Y PUNTOS */
+    .timeline-container::before,
+    .timeline-dot {
+        display: none !important;
+    }
+    .timeline-container {
+        padding: 0 10px !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    /* 2. FORZAR LA ESTRUCTURA DEL ITEM */
+    /* Apuntamos a todos los casos posibles para sobrescribir */
+    .timeline-item, 
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        display: flex !important;
+        flex-direction: column !important; /* Fecha arriba, Card abajo */
+        align-items: center !important;    /* Centrado horizontal */
+        width: 100% !important;
+        margin-bottom: 40px !important;
+        padding: 0 !important;
+    }
+    .timeline-item {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* 3. FORZAR ESTILO DE LA FECHA */
+    .timeline-date,
+    .timeline-item:nth-child(odd) .timeline-date,
+    .timeline-item:nth-child(even) .timeline-date {
+        position: static !important; /* Quita cualquier absolute */
+        width: 100% !important;
+        text-align: center !important;
+        padding: 0 !important;
+        margin: 0 0 15px 0 !important; /* Espacio debajo de la fecha */
+        order: 1 !important; /* Asegura que vaya visualmente primero */
+        left: auto !important;
+        right: auto !important;
+    }
+     .timeline-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+    }
+    .contact-info, .contact-form-wrapper {
+        width: 100% !important;
+        padding: 20px !important; /* Asegurar padding interno */
+    }
+
+
+    /* 4. FORZAR ESTILO DE LA CARD */
+    .timeline-content,
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        position: static !important;
+        width: 90% !important; /* Card centrada con márgenes a los lados */
+        margin: 0 !important;  /* Resetea los márgenes laterales de PC */
+        left: auto !important;
+        right: auto !important;
+        text-align: left !important; /* Texto interno a la izquierda */
+        order: 2 !important; /* Asegura que vaya visualmente segundo */
+    }
+    .contact-container {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        padding: 0 !important;
+        gap: 40px !important;
+    }
+
+
+    .footer-title {
+        font-size: 2rem !important; /* Título más pequeño */
+        word-wrap: break-word; /* Evitar que palabras largas rompan */
+    }
+
+    .social-links-container {
+        justify-content: center; /* Centrar iconos en móvil */
+    }
+    
+    .contact-info {
+        text-align: center;
+    }
+        #typed-name {
+        font-size: 2rem !important; /* El mismo tamaño que el título */
+        display: inline-block;
+    }
+        .typed-name-container {
+        width: 100% !important; /* Ocupar todo el ancho disponible */
+        max-width: 100% !important;
+        text-align: center !important;
+        white-space: normal !important; /* Permitir que se ajuste si es necesario */
+        height: auto !important;
+        display: block !important;
+        margin: 10px 0 !important;
+    }
+
+
+}
+/* Puedes añadir un cursor intermitente si lo deseas, para simular un terminal */
+#typed-name {
+    border-right: 2px solid var(--color-accent); /* Simula el cursor */
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--color-accent); }
+}
+
+/* Nuevo contenedor para el nombre que arregla el CLS */
+.typed-name-container {
+    display: inline-block; 
+    
+    /* Mantenemos el ancho para evitar el salto de pantalla (CLS) */
+    width: 450px; 
+    
+    overflow: hidden; 
+    white-space: nowrap; 
+    
+    /* ✨ SOLUCIÓN FINAL: Alinea la base del contenedor con la base del texto circundante */
+    vertical-align: middle; 
+    
+    /* Esto ayuda a que el contenedor no tenga espacio extra */
+    line-height: 1; 
+    text-align: left;
+}
+
+.hero-title span {
+    vertical-align: bottom; /* Aplicamos a todos los spans dentro del título */
+}
+/* --- 5. Estilos de Proyectos --- */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    padding: 0 20px;
+}
+
+.project-card {
+background: rgba(255, 255, 255, 0.03); /* Blanco al 3% (muy sutil) */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Borde casi invisible */
+    
+    /* Mantenemos el resto */
+    border-radius: 12px; /* Un poco más redondeado para vidrio */
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s ;
+    overflow: hidden;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    /* Resplandor morado suave */
+    box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.3); 
+    border-color: var(--color-accent); /* El borde se ilumina morado */
+}
+
+.project-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.project-title {
+    font-size: 1.5em;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+}
+
+.project-description {
+    color: var(--color-light);
+    margin-bottom: 15px;
+    font-size: 0.95em;
+}
+
+.project-tech-list {
+    margin: 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tech-badge {
+    display: inline-block;
+    background-color: rgba(139, 92, 246, 0.2); /* Fondo morado transparente */
+    color: var(--color-accent);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+    
+}
+.skills-list>.tech-badge{
+    padding: 10px 15px;
+    font-size: 1em;
+    transition: .2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+    
+.skills-list>.tech-badge:hover{
+    transform: translateY(-5px);
+        background-color: rgba(139, 92, 246, 0.5); 
+        color: #c3abfa;
+}
+
+.project-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Botón Secundario (para el Código) */
+.btn-secondary {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: transparent;
+    color: var(--color-accent); 
+    border: 2px solid var(--color-accent);
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-accent);
+    color: var(--color-dark);
+}
+/* --- 6. Estilos de Habilidades --- */
+.skills-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px; /* Más espacio entre los badges en esta sección */
+    padding: 0 20px;
+}
+
+/* El estilo .tech-badge se reutiliza de la sección de proyectos */
+
+.header {
+    background: rgba(26, 26, 26, 0.8); /* Fondo oscuro al 80% de opacidad */
+    backdrop-filter: blur(10px);       /* Efecto borroso detrás */
+    -webkit-backdrop-filter: blur(10px); /* Soporte para Safari */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
+    background-color: var(--color-dark);
+    padding: 15px 0;
+    position: sticky; /* Fija el header en la parte superior */
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--color-gray-border);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+.nav-link {
+    color: var(--color-light);
+    margin-left: 25px;
+    padding: 5px 0;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--color-accent);
+}
+
+/* --- Estilos para Menú Móvil (Oculto en PC) --- */
+
+.menu-toggle {
+    display: none; /* Oculto en escritorio */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-accent);
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+.reveal {
+    opacity: 0;
+    transform: translateY(30px); /* Empieza 30px abajo */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Estado Final: Visible y en Posición Original */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* --- 6. Estilos de Línea de Tiempo (Experiencia) --- */
+
+.timeline-container {
+    max-width: 900px;
+    margin: 60px auto;
+    position: relative;
+    padding: 0 20px;
+}
+
+/* Dibujar la línea vertical central */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%; /* Posicionada en el centro */
+    width: 2px;
+    height: 100%;
+    background: var(--color-gray-border);
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.timeline-item {
+    margin-bottom: 50px;
+    position: relative;
+    /* Usamos Flexbox para organizar el item, pero el contenido real lo manejamos con márgenes */
+    display: flex; 
+    align-items: center; /* Centra el dot y el contenido verticalmente */
+}
+.timeline-item:hover .timeline-content {
+    border-color: rgba(139, 92, 246, 0.5);
+}
+
+/* Punto o Círculo en la línea de tiempo */
+.timeline-dot {
+    position: absolute;
+    top: 0; /* Aseguramos que esté arriba para centrar con el texto */
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    background: var(--color-accent);
+    border: 3px solid var(--color-dark);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+/* El contenido que está en la tarjeta (Título, Descripción) */
+.timeline-content {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    width: 45%;
+    padding: 20px;
+    background-color: #242424; /* Usar el color oscuro del proyecto */
+    border: 1px solid var(--color-gray-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 2;
+}
+
+/* La fecha ahora estará DENTRO del flujo, no absoluta */
+.timeline-date {
+    width: 45%; /* Debe ocupar el mismo ancho que el contenido de la tarjeta */
+    font-weight: bold;
+    color: var(--color-accent);
+    text-align: right;
+    padding-right: 30px; /* Separación de la línea central */
+}
+
+/* ------------------------------------------- */
+/* Alternar Lados (Derecha e Izquierda) */
+/* ------------------------------------------- */
+
+/* Items Impares: A la Izquierda */
+.timeline-item:nth-child(odd) {
+    /* Por defecto, los items pares tienen la fecha a la izquierda y el contenido a la derecha */
+    flex-direction: row-reverse; /* Invertir orden: [Contenido] [Fecha] */
+    justify-content: space-between;
+}
+
+.timeline-item:nth-child(odd) .timeline-date {
+    text-align: left; /* La fecha se alinea a la izquierda de su 45% */
+    padding-left: 30px; 
+    padding-right: 0;
+}
+
+/* Items Pares: A la Derecha */
+.timeline-item:nth-child(even) {
+    /* Por defecto: [Fecha] [Contenido] */
+    flex-direction: row; 
+    justify-content: space-between;
+}
+
+.timeline-item:nth-child(even) .timeline-date {
+    text-align: right; /* La fecha se alinea a la derecha de su 45% */
+    padding-right: 30px; 
+    padding-left: 0;
+}
+/* --- 7. Sección de Contacto y Footer Mejorado --- */
+
+.footer-section {
+    margin-top: 80px;
+    padding: 60px 20px 20px;
+    background: rgba(26, 26, 26, 0.6); /* Fondo semi-transparente */
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.contact-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas en PC */
+    gap: 60px;
+    align-items: start;
+    margin-bottom: 60px;
+}
+
+/* Columna Izquierda: Info */
+.footer-title {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    background-image: linear-gradient(45deg, var(--color-text), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.footer-text {
+    color: var(--color-light);
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+/* Botones Sociales (Círculos SVG) */
+.social-links-container {
+    display: flex;
+    gap: 15px;
+}
+
+.social-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-text);
+    transition: all 0.3s ease;
+}
+
+.social-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Colores específicos al hacer Hover */
+.social-btn.linkedin:hover {
+    background: #0077b5;
+    border-color: #0077b5;
+    color: white;
+    transform: translateY(-5px);
+}
+
+.social-btn.github:hover {
+    background: #333;
+    border-color: #333;
+    color: white;
+    transform: translateY(-5px);
+}
+
+.social-btn.email:hover {
+    background: var(--color-accent); /* Tu color morado */
+    border-color: var(--color-accent);
+    color: white;
+    transform: translateY(-5px);
+}
+
+/* Columna Derecha: Formulario */
+.contact-form-wrapper {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+/* Inputs y Textarea */
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: var(--color-text);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--color-accent);
+}
+
+/* Labels Flotantes (Efecto Moderno) */
+.contact-form label {
+    position: absolute;
+    left: 15px;
+    top: 12px;
+    color: #888;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+/* Mueve el label arriba si hay foco o si el input no está vacío */
+.contact-form input:focus ~ label,
+.contact-form input:not(:placeholder-shown) ~ label,
+.contact-form textarea:focus ~ label,
+.contact-form textarea:not(:placeholder-shown) ~ label {
+    top: -22px;
+    left: 0;
+    color: var(--color-accent);
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.submit-btn {
+    width: 100%;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+/* Barra de Copyright */
+.copyright-bar {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: #666;
+    font-size: 0.9em;
+}
+html, body {
+    overflow-x: hidden !important; /* Corta cualquier cosa que se salga del ancho */
+    width: 100% !important;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+* {
+    box-sizing: border-box; /* Esto es vital para que padding no rompa el layout */
+}
+html {
+    /* Activa el scroll suave nativo del navegador */
+    scroll-behavior: smooth ;
+}
+
+/* IMPORTANTE: Corrección para el Menú Fijo (Sticky Header) */
+/* Esto evita que el título de la sección quede escondido detrás del menú al hacer scroll */
+section, footer {
+    scroll-margin-top: 100px; /* Ajusta este valor al alto de tu barra de navegación */
+}
+#scrollTopBtn {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: var(--color-accent);
+    color: white;
+    cursor: pointer;
+    padding: 15px 20px;
+    border-radius: 50%; /* Redondo */
+    box-shadow: 0 4px 10px rgba(139, 92, 246, 0.4);
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+#scrollTopBtn:hover {
+    background-color: #6D3DED;
+    transform: translateY(-5px);
+}
